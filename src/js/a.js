@@ -9,7 +9,7 @@
 
 console.info('require page a.');
 
-require('commonCss');
+require('../css/common.css');
 require('../css/a.css');
 
 require('zepto');

@@ -9,13 +9,18 @@
 
 console.info('require page b.')
 
-require('commonCss')
-require('../css/b.css')
+require('../css/common.css');
+require('../css/b.css');
 
 require('zepto')
 
 // 直接使用npm模块
 const _ = require('lodash')
 
-const report = require('./helpers/report')
+
 const bar = require('./helpers/bar')
+
+$('h1').click(function(){
+  console.log('h1点击');
+  const report = require('./helpers/report')
+})

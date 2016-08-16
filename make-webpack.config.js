@@ -25,6 +25,14 @@ const srcDir = path.resolve(process.cwd(), 'src')
 const assets = path.resolve(process.cwd(), 'assets')
 const nodeModPath = path.resolve(__dirname, './node_modules')
 const pathMap = require('./src/pathmap.json')
+// postcss初始化部分
+const precss = require('precss');
+const stylelint = require('stylelint')
+const rucksack = require('rucksack-css');
+rucksack({
+  autoprefixer: true,
+  fallbacks: true
+});
 
 let entries = (() => {
     let jsDir = path.resolve(srcDir, 'js')
@@ -91,7 +99,9 @@ module.exports = (options) => {
 
     if(dev) {
         extractCSS = new ExtractTextPlugin('css/[name].css?[contenthash]')
-        cssLoader = extractCSS.extract(['css'])
+        // cssLoader = extractCSS.extract(['css'])
+        // 添加postcss
+        cssLoader = extractCSS.extract(['css!postcss'])
         sassLoader = extractCSS.extract(['css', 'sass'])
         plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin())
     } else {
@@ -102,7 +112,7 @@ module.exports = (options) => {
             // @see https://github.com/webpack/extract-text-webpack-plugin
             allChunks: false
         })
-        cssLoader = extractCSS.extract(['css?minimize'])
+        cssLoader = extractCSS.extract(['css!postcss?minimize'])
         sassLoader = extractCSS.extract(['css?minimize', 'sass'])
 
         plugins.push(
@@ -169,6 +179,9 @@ module.exports = (options) => {
                 {test: /\.scss$/, loader: sassLoader},
                 {test: /\.jsx?$/, loader: 'babel?presets[]=react,presets[]=es2015'}
             ]
+        },
+        postcss: function(){
+          return [precss,rucksack]
         },
 
         plugins: [
