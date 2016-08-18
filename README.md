@@ -136,6 +136,9 @@ output: {
 - webpack配置pathMap项，添加React等常用lib的默认路径
 - webpack配置增加liveload支持 by @liupy525
 
+#### 2016.08.18
+非原版修改，加入了postcss，引入了webpack-dashboard
+
 ### License
 
 MIT.
