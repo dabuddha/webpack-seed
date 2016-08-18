@@ -207,6 +207,7 @@ module.exports = (options) => {
 
         devServer: {
             hot: true,
+            quiet: true,
             noInfo: false,
             inline: true,
             publicPath: publicPath,

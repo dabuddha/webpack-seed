@@ -75,7 +75,14 @@ if(dev) {
     let webpackDevMiddleware = require('koa-webpack-dev-middleware')
     let webpack = require('webpack')
     let webpackConf = require('../webpack-dev.config')
+    let Dashboard = require('webpack-dashboard')
+    let DashboardPlugin = require('webpack-dashboard/plugin')
     let compiler = webpack(webpackConf)
+
+    let dashboard = new Dashboard();
+    compiler.apply(new DashboardPlugin(dashboard.setData));
+
+
 
     // 为使用Koa做服务器配置koa-webpack-dev-middleware
     app.use(webpackDevMiddleware(compiler, webpackConf.devServer))
