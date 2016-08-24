@@ -105,7 +105,7 @@ module.exports = (options) => {
         sassLoader = extractCSS.extract(['css', 'sass'])
         plugins.push(extractCSS, new webpack.HotModuleReplacementPlugin())
     } else {
-        extractCSS = new ExtractTextPlugin('css/[contenthash:8].[name].min.css', {
+        extractCSS = new ExtractTextPlugin('css/[name].[contenthash:8].min.css', {
             // 当allChunks指定为false时，css loader必须指定怎么处理
             // additional chunk所依赖的css，即指定`ExtractTextPlugin.extract()`
             // 第一个参数`notExtractLoader`，一般是使用style-loader
@@ -147,8 +147,8 @@ module.exports = (options) => {
 
         output: {
             path: assets,
-            filename: dev ? '[name].js' : 'js/[chunkhash:8].[name].min.js',
-            chunkFilename: dev ? '[chunkhash:8].chunk.js' : 'js/[chunkhash:8].chunk.min.js',
+            filename: dev ? '[name].js' : 'js/[name].[chunkhash:8].min.js',
+            chunkFilename: dev ? 'chunk.[chunkhash:8].js' : 'js/chunk.[chunkhash:8].min.js',
             hotUpdateChunkFilename: dev ? '[id].js' : 'js/[id].[chunkhash:8].min.js',
             publicPath: publicPath
         },
@@ -166,13 +166,13 @@ module.exports = (options) => {
                     loaders: [
                         // url-loader更好用，小于10KB的图片会自动转成dataUrl，
                         // 否则则调用file-loader，参数直接传入
-                        'url?limit=10000&name=img/[hash:8].[name].[ext]',
+                        'url?limit=10000&name=img/[name].[hash:8].[ext]',
                         'image?{bypassOnDebug:true, progressive:true,optimizationLevel:3,pngquant:{quality:"65-80",speed:4}}'
                     ]
                 },
                 {
                     test: /\.((ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9]))|(ttf|eot)$/,
-                    loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+                    loader: 'url?limit=10000&name=fonts/[name].[hash:8].[ext]'
                 },
                 {test: /\.(tpl|ejs)$/, loader: 'ejs'},
                 {test: /\.css$/, loader: cssLoader},
@@ -191,13 +191,13 @@ module.exports = (options) => {
                 sourceType: 'var',
                 // name: 'assets/dll/js/reactStuff.js'
             }),*/
-            new CommonsChunkPlugin({
-                name: 'common-b-c',
-                chunks: ['b', 'c']
-            }),
+            // new CommonsChunkPlugin({
+            //     name: 'common-b-c',
+            //     chunks: ['b', 'c']
+            // }),
             new CommonsChunkPlugin({
                 name: 'common',
-                chunks: ['common-b-c', 'a']
+                chunks: chunks
             }),
             new CommonsChunkPlugin({
                 name: 'vender',

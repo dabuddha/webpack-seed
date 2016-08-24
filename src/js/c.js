@@ -9,8 +9,8 @@
 
 console.info('require page c.');
 
-import 'commonCss'
-import '../scss/c.scss'
+require('../css/common.css');
+require('../css/b.css');
 
 let $ = require('zepto')
 

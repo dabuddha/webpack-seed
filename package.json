@@ -3,6 +3,7 @@
   "description": "Frontend engineering solution based on webpack.",
   "version": "0.1.0",
   "scripts": {
+    "new": "./bin/new.sh",
     "start-dev": "node server/app",
     "validate-webpack:dev":"webpack-validator webpack-dev.config.js",
     "validate-webpack:pro":"webpack-validator webpack.config.js",

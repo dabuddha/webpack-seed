@@ -118,6 +118,12 @@ output: {
 
 ### 修改日志
 
+#### 2016.08.24
+**非原版修改**：引入新命令'npm run new [filename]',可以在对应位置生成，html，css和js文件，修改CommonsChunkPlugin的common部分自动包括所有数组。修改命名规则，把hash放到了文件名的后面。
+
+#### 2016.08.18
+**非原版修改**：加入了postcss，引入了webpack-dashboard
+
 #### 2016.07.12
 
 - 配置增加`DefinePlugin`插件，即生产模式build时使用`production`模式，减小打包后文件的体积
@@ -136,8 +142,7 @@ output: {
 - webpack配置pathMap项，添加React等常用lib的默认路径
 - webpack配置增加liveload支持 by @liupy525
 
-#### 2016.08.18
-非原版修改，加入了postcss，引入了webpack-dashboard
+
 
 ### License
 
